@@ -1,0 +1,23 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ FinnT730 ]
+  pull_request:
+    branches: [ FinnT730 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: build
+          make
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          # Artifact name
+          name: buildOfProgram # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: build/buildOfProgram
