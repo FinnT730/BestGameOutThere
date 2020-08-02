@@ -13,7 +13,8 @@ jobs:
 
     steps:
       - name: build
-        run: make
+        run: cd cmake-build-debug/
+          make
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
