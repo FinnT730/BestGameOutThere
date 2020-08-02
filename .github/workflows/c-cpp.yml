@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    name: cdmake
+    - name: cdmake
       run: cd cmake-build-debug
     - name: make
       run: make
