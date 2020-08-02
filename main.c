@@ -45,6 +45,10 @@ int main(void)
 //    SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
+
+    Vector3 start = {0,0,0};
+    Vector3 end = {0,9,0};
+
     // Main game loop
     while (!WindowShouldClose())        // Detect window close button or ESC key
     {
@@ -88,9 +92,6 @@ int main(void)
             DrawCubeWires(cubePosition, cubeSize.x, cubeSize.y, cubeSize.z, DARKGRAY);
         }
 
-        Vector3 start = {0,0,0};
-        Vector3 end = {0,9,0};
-
         if(IsKeyPressed(' ')) {
             end.x += 10;
         }
@@ -99,8 +100,6 @@ int main(void)
 
         DrawRay(ray, MAROON);
         DrawGrid(10, 1.0f);
-
-
 
 
         EndMode3D();
