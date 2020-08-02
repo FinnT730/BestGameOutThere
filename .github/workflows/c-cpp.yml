@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: build
-          make
+        run: make
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
