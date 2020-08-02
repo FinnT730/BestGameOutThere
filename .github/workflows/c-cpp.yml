@@ -13,8 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: cdmake
-      run: cd cmake-build-debug
+    - name: makeBuildDir
+      run: mkdir build && cd build/
+    - name: init cmake
+      run: cmake ..
     - name: make
       run: make
     - name: make check
