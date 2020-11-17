@@ -1,19 +1,10 @@
+#include "headers/Player.h"
 #include "raylib.h"
 
 #define SCREEN_WIDTH (640)
 #define SCREEN_HEIGHT (480)
 
-struct {
 
-    float xpos;
-    float ypos;
-    float width;
-    float height;
-
-
-    float moveSpeed;
-
-} player;
 
 
 int main(void)
@@ -24,6 +15,10 @@ int main(void)
     const int screenHeight = 450;
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d picking");
+
+
+    struct Player player;
+    player.playerPos = (Vector3){3,0,3};
 
     // Define the camera to look into our 3d world
     Camera camera = { 0 };
@@ -95,6 +90,8 @@ int main(void)
         if(IsKeyPressed(' ')) {
             end.x += 10;
         }
+
+        DrawCube(player.playerPos, 1,1,1,BLUE);
 
         DrawLine3D(start,end,BLUE);
 

@@ -9,5 +9,5 @@ set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
 
 add_subdirectory("libs/raylib")
 
-add_executable(untitled9 main.c)
+add_executable(untitled9 main.c headers/Player.h)
 target_link_libraries(untitled9 PRIVATE raylib)
