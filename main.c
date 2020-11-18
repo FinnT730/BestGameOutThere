@@ -102,6 +102,9 @@ int main(void)
         DrawGrid(10, 1.0f);
 
 
+        DrawCube((Vector3){4,2,4},1,1,1,RED);
+
+
         EndMode3D();
 
         DrawText("Try selecting the box with mouse!", 240, 10, 20, DARKGRAY);
@@ -109,6 +112,7 @@ int main(void)
         if(collision) DrawText("BOX SELECTED", (screenWidth - MeasureText("BOX SELECTED", 30)) / 2, screenHeight * 0.1f, 30, GREEN);
 
         DrawFPS(10, 10);
+
 
         EndDrawing();
         //----------------------------------------------------------------------------------
