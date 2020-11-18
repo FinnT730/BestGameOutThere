@@ -1,19 +1,17 @@
 #include "raylib.h"
+#include <stdio.h>
 
 #define SCREEN_WIDTH (640)
 #define SCREEN_HEIGHT (480)
 
-struct {
-
-    float xpos;
-    float ypos;
-    float width;
-    float height;
 
 
-    float moveSpeed;
-
+struct Player {
+    float x;
+    float y;
+    float z;
 } player;
+
 
 
 int main(void)
@@ -49,6 +47,9 @@ int main(void)
     Vector3 start = {0,0,0};
     Vector3 end = {0,9,0};
 
+
+
+
     // Main game loop
     while (!WindowShouldClose())        // Detect window close button or ESC key
     {
@@ -56,19 +57,57 @@ int main(void)
         //----------------------------------------------------------------------------------
         UpdateCamera(&camera);          // Update camera
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            if (!collision)
-            {
-                ray = GetMouseRay(GetMousePosition(), camera);
+//        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+//        {
+//            if (!collision)
+//            {
+//                ray = GetMouseRay(GetMousePosition(), camera);
+//
+//                // Check collision between ray and box
+//                collision = CheckCollisionRayBox(ray,
+//                                                 (BoundingBox){(Vector3){ cubePosition.x - cubeSize.x/2, cubePosition.y - cubeSize.y/2, cubePosition.z - cubeSize.z/2 },
+//                                                               (Vector3){ cubePosition.x + cubeSize.x/2, cubePosition.y + cubeSize.y/2, cubePosition.z + cubeSize.z/2 }});
+//            }
+//            else collision = false;
+//        }
 
-                // Check collision between ray and box
-                collision = CheckCollisionRayBox(ray,
-                                                 (BoundingBox){(Vector3){ cubePosition.x - cubeSize.x/2, cubePosition.y - cubeSize.y/2, cubePosition.z - cubeSize.z/2 },
-                                                               (Vector3){ cubePosition.x + cubeSize.x/2, cubePosition.y + cubeSize.y/2, cubePosition.z + cubeSize.z/2 }});
-            }
-            else collision = false;
+
+//        switch (GetKeyPressed()) {
+//            case KEY_A: {
+//                player.x -= 1;
+//                printf("A has been pressed");
+//                break;
+//            }
+//            case KEY_W: {
+//                player.y += 1;
+//                break;
+//            }
+//            case KEY_D: {
+//                player.x += 1;
+//                break;
+//            }
+//            case KEY_S: {
+//                player.y -= 1;
+//                break;
+//            }
+//        }
+
+        const float speed =  0.02f;
+        if(IsKeyDown(KEY_W)) {
+            player.x -= speed;
         }
+        if(IsKeyDown(KEY_S)) {
+            player.x += speed;
+        }
+        if(IsKeyDown(KEY_A)) {
+            player.y += speed;
+        }
+        if(IsKeyDown(KEY_D)) {
+            player.y -= speed;
+        }
+
+
+
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -79,22 +118,6 @@ int main(void)
 
         BeginMode3D(camera);
 
-        if (collision)
-        {
-            DrawCube(cubePosition, cubeSize.x, cubeSize.y, cubeSize.z, RED);
-            DrawCubeWires(cubePosition, cubeSize.x, cubeSize.y, cubeSize.z, MAROON);
-
-            DrawCubeWires(cubePosition, cubeSize.x + 0.2f, cubeSize.y + 0.2f, cubeSize.z + 0.2f, GREEN);
-        }
-        else
-        {
-            DrawCube(cubePosition, cubeSize.x, cubeSize.y, cubeSize.z, GRAY);
-            DrawCubeWires(cubePosition, cubeSize.x, cubeSize.y, cubeSize.z, DARKGRAY);
-        }
-
-        if(IsKeyPressed(' ')) {
-            end.x += 10;
-        }
 
         DrawLine3D(start,end,BLUE);
 
@@ -102,14 +125,14 @@ int main(void)
         DrawGrid(10, 1.0f);
 
 
-        DrawCube((Vector3){4,2,4},1,1,1,RED);
+        DrawCube((Vector3){player.x,1,player.y},1,1,1,RED);
 
 
         EndMode3D();
 
-        DrawText("Try selecting the box with mouse!", 240, 10, 20, DARKGRAY);
+//        DrawText("Try selecting the box with mouse!", 240, 10, 20, DARKGRAY);
 
-        if(collision) DrawText("BOX SELECTED", (screenWidth - MeasureText("BOX SELECTED", 30)) / 2, screenHeight * 0.1f, 30, GREEN);
+//        if(collision) DrawText("BOX SELECTED", (screenWidth - MeasureText("BOX SELECTED", 30)) / 2, screenHeight * 0.1f, 30, GREEN);
 
         DrawFPS(10, 10);
 
