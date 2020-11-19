@@ -19,13 +19,23 @@ struct Block {
 struct Chunk {
     int x;
     int y;
-    struct Block blocks[];
+    struct Block blocks[100];
 } chunk;
 
 
 struct World {
-    struct Chunk chunks[];
+    struct Chunk chunks[100000];
 } world;
+
+
+void generate(int x, int y) {
+    struct Block block1;
+    block1.x = 7;
+    block1.y = -2;
+    block1.z = 3;
+    block.color = PURPLE;
+    chunk.blocks[0] = block1;
+}
 
 
 #endif //UNTITLED9_WORLD_H

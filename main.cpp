@@ -1,10 +1,23 @@
 #include "raylib.h"
 #include <stdio.h>
 
+#include "World.h"
+#include "libs/raylib/src/external/stb_truetype.h"
+
 #define SCREEN_WIDTH (640)
 #define SCREEN_HEIGHT (480)
 
 
+#define each(item, array, length) \
+(typeof(*(array)) *p = (array), (item) = *p; p < &((array)[length]); p++, (item) = *p)
+
+
+
+
+#define foreach(item, array) for(int i = 0; i < sizeof(array) * 3; i += 1) { \
+                            item = array[i];                                 \
+                            DrawCube((Vector){item.x,item.y,item.z},1,1,1,BLUE);                       \
+}\
 
 struct Player {
     float x;
@@ -16,6 +29,11 @@ struct Player {
 
 int main(void)
 {
+
+
+    generate(1,1);
+
+
     // Initialization
     //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
@@ -25,9 +43,9 @@ int main(void)
 
     // Define the camera to look into our 3d world
     Camera camera = { 0 };
-    camera.position = (Vector3){ 10.0f, 10.0f, 5.0f }; // Camera position
-    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    camera.position = { 10.0f, 10.0f, 5.0f }; // Camera position
+    camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
+    camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.type = CAMERA_PERSPECTIVE;                   // Camera mode type
 
@@ -125,7 +143,11 @@ int main(void)
         DrawGrid(10, 1.0f);
 
 
-        DrawCube((Vector3){player.x,1,player.y},1,1,1,RED);
+        DrawCube({player.x,1,player.y},1,1,1,RED);
+
+//
+//        struct Block item;
+//        foreach(item, chunk.blocks)
 
 
         EndMode3D();
