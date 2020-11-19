@@ -30,8 +30,8 @@ struct Player {
 int main(void)
 {
 
-
-    generate(1,1);
+    World world;
+    world.generate(0,0);
 
 
     // Initialization
@@ -71,6 +71,9 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())        // Detect window close button or ESC key
     {
+
+        camera.target = { player.x, player.z, player.y };
+
         // Update
         //----------------------------------------------------------------------------------
         UpdateCamera(&camera);          // Update camera
@@ -149,7 +152,7 @@ int main(void)
 //        struct Block item;
 //        foreach(item, chunk.blocks)
 
-        for(Block &bl : chunk.blocks) {
+        for(Block &bl : world.blocks) {
             DrawCube({bl.x,bl.y,bl.z},1,1,1,bl.color);
         }
 
