@@ -27,14 +27,28 @@ struct World {
     struct Chunk chunks[100000];
 } world;
 
+int index = 0;
 
 void generate(int x, int y) {
-    struct Block block1;
+    Block block1{};
     block1.x = 7;
-    block1.y = -2;
+    block1.y = -1;
     block1.z = 3;
     block.color = PURPLE;
-    chunk.blocks[0] = block1;
+    chunk.blocks[index] = block1;
+    index++;
+
+
+    for(int i = 0; i < 10; i++) {
+        Block block1{};
+        block1.x = i;
+        block1.y = -1;
+        block1.z = 3;
+        block.color = PURPLE;
+        chunk.blocks[index] = block1;
+        index++;
+    }
+
 }
 
 

@@ -149,6 +149,10 @@ int main(void)
 //        struct Block item;
 //        foreach(item, chunk.blocks)
 
+        for(Block &bl : chunk.blocks) {
+            DrawCube({bl.x,bl.y,bl.z},1,1,1,bl.color);
+        }
+
 
         EndMode3D();
 
